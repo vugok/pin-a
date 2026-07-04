@@ -7,14 +7,28 @@
     <title>Pin-A | Plataforma Educativa Gamificada</title>
     <style>
         :root {
-            --bg-base: #0b0f19;
-            --bg-surface: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-purple: #8b5cf6;
-            --accent-cyan: #06b6d4;
-            --reward-green: #10b981;
-            --risk-red: #ef4444;
+            /* Tema Claro */
+            --bg-base: #ffffff;
+            --bg-surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+
+            /* Colores Gamificación y Acentos */
+            --accent-orange: #f97316;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+
+            /* Bordes Pastel de Tarjetas */
+            --border-blue: #bfdbfe;
+            --border-pink: #fbcfe8;
+            --border-orange: #fed7aa;
+
+            /* Fondos Claros para Etiquetas */
+            --bg-tag-blue: #eff6ff;
+            --bg-tag-yellow: #fef9c3;
         }
 
         * {
@@ -33,73 +47,110 @@
             min-height: 100vh;
         }
 
-        /* Cabecera */
-        header {
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
-            padding: 1rem 0;
-            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
-        }
-
-        /* Contenedor Flex para alinear logo e h1 */
-        .header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            width: 100%;
-        }
-
-        /* Imagen del logotipo */
-        .main-logo {
-            height: 40px;
-            /* Ajusta la altura según sea necesario */
-            width: auto;
-            margin-right: 1rem;
-            /* Espacio entre el logo y el texto */
-        }
-
-        header h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Navegación */
-        nav {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 1rem;
+        /* Barra de Navegación Superior Unificada */
+        .top-navbar {
+            background-color: var(--bg-surface);
+            padding: 0.75rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #334155;
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .main-logo {
+            height: 35px;
+            width: auto;
+        }
+
+        /* Enlaces de Navegación */
         nav ul {
             display: flex;
-            justify-content: center;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
-            flex-wrap: wrap;
         }
 
         nav a {
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s ease, transform 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            transition: color 0.2s ease;
         }
 
         nav a:hover {
-            color: var(--accent-cyan);
-            transform: translateY(-2px);
+            color: var(--accent-blue);
+        }
+
+        /* Indicadores de Gamificación (Derecha) */
+        .user-stats {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .stat-flame {
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-coins {
+            background-color: var(--bg-tag-yellow);
+            color: #ca8a04;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-level {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-username {
+            background-color: var(--bg-tag-blue);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background-color: #cbd5e1;
+            border-radius: 50%;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .logout-btn {
+            color: var(--accent-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         /* Contenido Principal */
@@ -107,106 +158,153 @@
             flex: 1;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem;
             width: 100%;
         }
 
-        .welcome-section {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        /* Título de Sección tipo Referencia */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            margin-top: 1rem;
         }
 
-        .welcome-section h2 {
-            font-size: 2.2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            border-bottom: 3px solid var(--accent-orange);
+            padding-bottom: 0.25rem;
         }
 
-        .welcome-section p {
+        .section-header .icon-eye {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
-        /* Cuadrícula de Módulos */
+        /* Cuadrícula de Módulos (Cards) */
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
         }
 
         article {
             background-color: var(--bg-surface);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            transition: all 0.3s ease;
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+            padding: 1.25rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
         }
 
         article:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.15);
-            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
-        .module-image {
-            width: 100%;
-            height: 180px;
-            background-color: #2a3b52;
+        /* Clases de Bordes Pastel */
+        .border-blue {
+            border-color: var(--border-blue);
+        }
+
+        .border-pink {
+            border-color: var(--border-pink);
+        }
+
+        .border-orange {
+            border-color: var(--border-orange);
+        }
+
+        /* Icono del Módulo (Izquierda) */
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 3px solid var(--accent-purple);
-            /* Marcador de posición para imágenes reales */
-            background-image: linear-gradient(45deg, #1e293b 25%, #2a3b52 25%, #2a3b52 50%, #1e293b 50%, #1e293b 75%, #2a3b52 75%, #2a3b52 100%);
-            background-size: 20px 20px;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
         }
 
+        .bg-blue {
+            background-color: var(--accent-blue);
+        }
+
+        .bg-pink {
+            background-color: var(--accent-pink);
+        }
+
+        .bg-orange {
+            background-color: var(--accent-orange);
+        }
+
+        /* Contenido del Módulo (Centro) */
         .module-content {
-            padding: 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
+        .module-category {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .text-blue {
+            color: var(--accent-blue);
+        }
+
+        .text-pink {
+            color: var(--accent-pink);
+        }
+
+        .text-orange {
+            color: var(--accent-orange);
+        }
+
         .module-content h3 {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.2;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
         }
 
-        .module-content p {
+        .reward-info {
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            flex: 1;
         }
 
-        .reward-badge {
-            display: inline-flex;
+        /* Botón de Acción (Derecha) */
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            width: fit-content;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: filter 0.2s;
         }
 
-        .reward-xp {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--reward-green);
-            border: 1px solid var(--reward-green);
-        }
-
-        .reward-risk {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--risk-red);
-            border: 1px solid var(--risk-red);
+        .action-btn:hover {
+            filter: brightness(1.1);
         }
 
         /* Pie de página */
@@ -214,7 +312,7 @@
             background-color: var(--bg-surface);
             padding: 2rem;
             text-align: center;
-            border-top: 1px solid #334155;
+            border-top: 1px solid #e2e8f0;
             margin-top: auto;
         }
 
@@ -226,37 +324,23 @@
         }
 
         .social-links a {
-            color: var(--accent-cyan);
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.2s;
         }
 
         .social-links a:hover {
-            color: var(--accent-purple);
+            color: var(--accent-blue);
         }
 
         /* Responsividad */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
+        @media (max-width: 1024px) {
+            .top-navbar {
+                flex-direction: column;
             }
 
-            .header-content {
-                justify-content: center;
-            }
-
-            /* Centra en pantallas pequeñas */
-            .main-logo {
-                height: 35px;
-            }
-
-            /* Reduce logo un poco */
             nav ul {
-                gap: 1rem;
-            }
-
-            .welcome-section h2 {
-                font-size: 1.8rem;
+                margin: 1rem 0;
             }
         }
     </style>
@@ -264,69 +348,79 @@
 
 <body>
 
-    <header>
-        <div class="header-content">
+    <div class="top-navbar">
+        <header class="header-left">
+            <span class="menu-icon">☰</span>
             <img src="pin.png" alt="Logo de Pin-A" class="main-logo">
-            <h1>Pin-A</h1>
-        </div>
-    </header>
+        </header>
 
-    <nav>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#flashcards">Flashcards</a></li>
-            <li><a href="#gambling">Gambling Learning</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#flashcards">Flashcards</a></li>
+                <li><a href="#gambling">Gambling Learning</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-stats">
+            <div class="stat-flame">🔥 11</div>
+            <div class="stat-coins">🪙 19424</div>
+            <div class="stat-level">NVL. 10</div>
+            <div class="stat-username">@Vugok</div>
+            <div class="avatar"></div>
+            <a href="#" class="logout-btn">🚪 Salir</a>
+        </div>
+    </div>
 
     <main>
-        <section class="welcome-section" id="inicio">
-            <h2>El conocimiento tiene su recompensa</h2>
-            <p>Un modelo de aprendizaje diseñado para la concentración y el rendimiento. Supera módulos interactivos,
-                apuesta tu conocimiento en desafíos contrarreloj y acumula experiencia para desbloquear nuevas
-                herramientas y asegurar tus metas académicas.</p>
-        </section>
+        <div class="section-header" id="cursos">
+            <h2>Ver nuestros cursos</h2>
+            <span class="icon-eye">👁️</span>
+        </div>
 
         <section class="modules-grid">
 
-            <article id="cursos">
-                <div class="module-image">
+            <article class="border-blue">
+                <div class="module-icon bg-blue">
+                    🧠
                 </div>
                 <div class="module-content">
-                    <h3>Lógica Matemática y Algoritmos</h3>
-                    <p>Curso interactivo enfocado en el desarrollo del pensamiento crítico y la resolución de problemas
-                        lógicos para exámenes de admisión estructurados.</p>
-                    <div class="reward-badge reward-xp">
-                        <span>+500 XP Nivel</span>
+                    <span class="module-category text-blue">CURSO INTERACTIVO</span>
+                    <h3>LÓGICA MATEMÁTICA</h3>
+                    <div class="reward-info">
+                        +500 XP Nivel
                     </div>
                 </div>
+                <button class="action-btn bg-blue">➔</button>
             </article>
 
-            <article id="flashcards">
-                <div class="module-image">
+            <article class="border-pink" id="flashcards">
+                <div class="module-icon bg-pink">
+                    🗂️
                 </div>
                 <div class="module-content">
-                    <h3>Repaso: Estructuras y Lógica Backend</h3>
-                    <p>Set de tarjetas de memorización activa sobre fundamentos de programación, bases de datos y
-                        arquitectura de software.</p>
-                    <div class="reward-badge reward-xp">
-                        <span>+200 Monedas</span>
+                    <span class="module-category text-pink">REPASO RÁPIDO</span>
+                    <h3>LÓGICA BACKEND</h3>
+                    <div class="reward-info">
+                        +200 Monedas
                     </div>
                 </div>
+                <button class="action-btn bg-pink">👁️</button>
             </article>
 
-            <article id="gambling">
-                <div class="module-image">
+            <article class="border-orange" id="gambling">
+                <div class="module-icon bg-orange">
+                    ⏱️
                 </div>
                 <div class="module-content">
-                    <h3>Desafío Pre-ICFES Contrarreloj</h3>
-                    <p>Apuesta tus monedas virtuales en un simulacro de alta presión. Responde correctamente antes de
-                        que el temporizador llegue a cero para multiplicar tus ganancias o asumir la penalización.</p>
-                    <div class="reward-badge reward-risk">
-                        <span>Multiplicador x2 / -100 Pts</span>
+                    <span class="module-category text-orange">DESAFÍO PRE-ICFES</span>
+                    <h3>CONTRARRELOJ</h3>
+                    <div class="reward-info" style="color: var(--accent-red);">
+                        Mult x2 / -100 Pts
                     </div>
                 </div>
+                <button class="action-btn bg-orange">➔</button>
             </article>
 
         </section>
