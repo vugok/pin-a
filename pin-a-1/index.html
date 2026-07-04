@@ -4,41 +4,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ColomPin</title>
+    <title>Pin-A | Plataforma Educativa Gamificada</title>
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --reward-green: #10b981;
+            --risk-red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabecera */
+        header {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Contenedor Flex para alinear logo e h1 */
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        /* Imagen del logotipo */
+        .main-logo {
+            height: 40px;
+            /* Ajusta la altura según sea necesario */
+            width: auto;
+            margin-right: 1rem;
+            /* Espacio entre el logo y el texto */
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navegación */
+        nav {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #334155;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Contenido Principal */
+        main {
+            flex: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            width: 100%;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-section h2 {
+            font-size: 2.2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Cuadrícula de Módulos */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        article {
+            background-color: var(--bg-surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        article:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.15);
+            border-color: var(--accent-purple);
+        }
+
+        .module-image {
+            width: 100%;
+            height: 180px;
+            background-color: #2a3b52;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid var(--accent-purple);
+            /* Marcador de posición para imágenes reales */
+            background-image: linear-gradient(45deg, #1e293b 25%, #2a3b52 25%, #2a3b52 50%, #1e293b 50%, #1e293b 75%, #2a3b52 75%, #2a3b52 100%);
+            background-size: 20px 20px;
+        }
+
+        .module-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .module-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .reward-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            width: fit-content;
+        }
+
+        .reward-xp {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--reward-green);
+            border: 1px solid var(--reward-green);
+        }
+
+        .reward-risk {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--risk-red);
+            border: 1px solid var(--risk-red);
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: var(--bg-surface);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #334155;
+            margin-top: auto;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                justify-content: center;
+            }
+
+            /* Centra en pantallas pequeñas */
+            .main-logo {
+                height: 35px;
+            }
+
+            /* Reduce logo un poco */
+            nav ul {
+                gap: 1rem;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
+
     <header>
-        <h1>ColomPin</h1>
-        <nav>
-            <a href="#productos">Productos</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
+        <div class="header-content">
+            <img src="pin.png" alt="Logo de Pin-A" class="main-logo">
+            <h1>Pin-A</h1>
+        </div>
     </header>
 
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#cursos">Cursos</a></li>
+            <li><a href="#flashcards">Flashcards</a></li>
+            <li><a href="#gambling">Gambling Learning</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <section id="hero">
-            <h2>Tu solución para...</h2>
-            <p>Descripción del problema que resuelves</p>
+        <section class="welcome-section" id="inicio">
+            <h2>El conocimiento tiene su recompensa</h2>
+            <p>Un modelo de aprendizaje diseñado para la concentración y el rendimiento. Supera módulos interactivos,
+                apuesta tu conocimiento en desafíos contrarreloj y acumula experiencia para desbloquear nuevas
+                herramientas y asegurar tus metas académicas.</p>
         </section>
 
-        <section id="productos">
-            <h2>Nuestros Productos</h2>
-            <article>
-                <img src="assets/images/producto1.jpg" alt="Nombre del producto">
-                <h3>Nombre del producto</h3>
-                <p>Descripción y precio</p>
+        <section class="modules-grid">
+
+            <article id="cursos">
+                <div class="module-image">
+                </div>
+                <div class="module-content">
+                    <h3>Lógica Matemática y Algoritmos</h3>
+                    <p>Curso interactivo enfocado en el desarrollo del pensamiento crítico y la resolución de problemas
+                        lógicos para exámenes de admisión estructurados.</p>
+                    <div class="reward-badge reward-xp">
+                        <span>+500 XP Nivel</span>
+                    </div>
+                </div>
             </article>
-        </section>
 
-        <section id="contacto">
-            <h2>Contáctanos</h2>
+            <article id="flashcards">
+                <div class="module-image">
+                </div>
+                <div class="module-content">
+                    <h3>Repaso: Estructuras y Lógica Backend</h3>
+                    <p>Set de tarjetas de memorización activa sobre fundamentos de programación, bases de datos y
+                        arquitectura de software.</p>
+                    <div class="reward-badge reward-xp">
+                        <span>+200 Monedas</span>
+                    </div>
+                </div>
+            </article>
+
+            <article id="gambling">
+                <div class="module-image">
+                </div>
+                <div class="module-content">
+                    <h3>Desafío Pre-ICFES Contrarreloj</h3>
+                    <p>Apuesta tus monedas virtuales en un simulacro de alta presión. Responde correctamente antes de
+                        que el temporizador llegue a cero para multiplicar tus ganancias o asumir la penalización.</p>
+                    <div class="reward-badge reward-risk">
+                        <span>Multiplicador x2 / -100 Pts</span>
+                    </div>
+                </div>
+            </article>
+
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 ColomPin - Camilo Andrés Araque García</p>
+        <p>&copy; 2026 Pin-A. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="#">X (Twitter)</a>
+            <a href="#">Instagram</a>
+            <a href="#">GitHub</a>
+        </div>
     </footer>
+
 </body>
 
 </html>
